@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Buy few products test" parallel="methods" thread-count="1">
+
+    <test name="Buy few products test">
+        <classes>
+            <class name="tests.FirstTests"/>
+        </classes>
+    </test>
+
+</suite>
