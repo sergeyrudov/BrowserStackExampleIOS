@@ -32,10 +32,6 @@ public abstract class TestScreen {
         waitUntilVisible();
     }
 
-    public IOSDriver<IOSElement> getAppDriver() {
-        return driver;
-    }
-
     public IOSElement findElement(AppLocator locator) {
         return waitForElementVisibility(Duration.ofSeconds(TIMEOUT_WAIT_ELEMENT_VISIBLE), locator);
     }
@@ -52,7 +48,7 @@ public abstract class TestScreen {
         try {
             waitForCondition(duration,
                     ExpectedConditions.visibilityOfAllElementsLocatedBy(locator.getBy()), true);
-            return getAppDriver().findElements(locator.getByIOS());
+            return driver.findElements(locator.getByIOS());
         } catch (Exception e) {
             return new ArrayList<>();
         }
@@ -61,7 +57,7 @@ public abstract class TestScreen {
     protected IOSElement waitForElementVisibility(Duration duration, AppLocator locator) {
         waitForCondition(duration,
                 ExpectedConditions.visibilityOfElementLocated(locator.getBy()));
-        return getAppDriver().findElement(locator.getByIOS());
+        return driver.findElement(locator.getByIOS());
     }
 
     protected void waitForCondition(Duration duration, ExpectedCondition expectedCondition, boolean suppressWarning) {

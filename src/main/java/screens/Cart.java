@@ -41,7 +41,6 @@ public class Cart extends TestScreen {
             MobileBy.xpath("//XCUIElementTypeStaticText[@name='THANK YOU FOR YOU ORDER']")
     );
 
-
     public String getOrderSuccessMessage() {
         return findElement(orderSuccessMessage).getAttribute("label");
     }

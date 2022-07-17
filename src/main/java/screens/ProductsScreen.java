@@ -52,11 +52,6 @@ public class ProductsScreen extends TestScreen {
         return Integer.parseInt(findElement(cart).getAttribute("label"));
     }
 
-
-
-
-
-
     public void screenComponentSoftAssert() {
         softAssert.assertTrue(isElementExists(productsHeader), "is absent");
         softAssert.assertTrue(isElementExists(toggle), "is absent");
