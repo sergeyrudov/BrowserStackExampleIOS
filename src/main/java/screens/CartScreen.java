@@ -5,7 +5,7 @@ import org.testng.asserts.SoftAssert;
 import utils.AppLocator;
 import java.time.Duration;
 
-public class Cart extends TestScreen {
+public class CartScreen extends TestScreen {
 
     SoftAssert softAssert = new SoftAssert();
 

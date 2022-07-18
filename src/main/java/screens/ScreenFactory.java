@@ -9,26 +9,10 @@ import java.util.logging.Logger;
 public class ScreenFactory {
     private static final Logger logger = Logger.getLogger(ScreenFactory.class.getName());
 
-    private static boolean isClassExists(String className) {
-        try {
-            Class.forName(className);
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public static <T extends TestScreen> T getScreenByClass(IOSDriver<IOSElement> driver, Class<T> classType) {
         try {
-            final String platformScreenName = MobilePlatform.IOS + classType.getSimpleName();
-            final String commonClassName = classType.getName();
-            final String customClassName = classType.getPackage().getName() + "." + MobilePlatform.IOS.toLowerCase() + "." + platformScreenName;
-
-            Class classDefinition = isClassExists(customClassName)
-                    ? Class.forName(customClassName)
-                    : Class.forName(commonClassName);
-
+            Class<?> classDefinition = Class.forName(classType.getName());
             T screen = (T) classDefinition.getDeclaredConstructor().newInstance();
             screen.initWhenVisible(driver);
             return screen;

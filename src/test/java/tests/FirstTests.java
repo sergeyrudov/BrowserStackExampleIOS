@@ -1,8 +1,9 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
-import screens.Cart;
+import screens.CartScreen;
 import screens.LoginScreen;
 import screens.ProductsScreen;
 import screens.ScreenFactory;
@@ -14,8 +15,9 @@ public class FirstTests extends BaseAppTest {
 
     @Test
     void checkThatUserCanBuyFewProducts()  {
+        Faker faker = new Faker();
         // open login screen, and wait for some elements
-        var login = ScreenFactory.getScreenByClass(driver, LoginScreen.class);
+        LoginScreen login = ScreenFactory.getScreenByClass(driver, LoginScreen.class);
         login.screenComponentSoftAssert();
 
         // sign in as STANDARD_USER
@@ -43,11 +45,15 @@ public class FirstTests extends BaseAppTest {
         products.tapOnCheckout();
 
         // init cart screen
-        Cart cart = ScreenFactory.getScreenByClass(driver, Cart.class);
+        CartScreen cart = ScreenFactory.getScreenByClass(driver, CartScreen.class);
         cart.screenComponentSoftAssert();
 
         // fill some fields on checkout/cart screen
-        cart.fillInCheckoutInfo("John", "Doe", "12346");
+        cart.fillInCheckoutInfo(
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.address().zipCode()
+        );
 
         // scroll down, and tap finish button
         cart.scrollDown();
